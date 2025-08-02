@@ -13,19 +13,19 @@ export default function CartPage() {
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
 
   const checkout = async () => {
-    try {
-      const api = process.env.REACT_APP_API_URL || 'http://localhost:4000';
-      await axios.post(`${api}/api/orders`, {
-        items,
-        total,
-      });
-      dispatch(clearCart());
-      alert('Order placed!');
-    } catch (err) {
-      console.error(err);
-      alert('Checkout failed');
-    }
-  };
+   const api = process.env.REACT_APP_API_URL;
+   try {
+     const { data } = await axios.post(
+       `${api}/api/create-checkout-session`,
+       { items },
+       { headers: { Authorization: `Bearer ${userInfo.token}` } }
+     );
+     window.location.href = data.url; // redirect to Stripe Checkout
+   } catch (err) {
+     console.error(err);
+     alert('Failed to start checkout');
+   }
+ };
 
   return (
     <div className="container">
