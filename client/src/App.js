@@ -1,38 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import { Container, Header, Menu } from 'semantic-ui-react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import FoodList from './components/FoodList';
+import CartPage from './components/CartPage';
 
 function App() {
-  const [foods, setFoods] = useState(null);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    console.log('📡 Fetching /api/foods directly…');
-    fetch('/api/foods')
-      .then(res => {
-        if (!res.ok) throw new Error(`Status ${res.status}`);
-        return res.json();
-      })
-      .then(data => {
-        console.log('✅ Received data:', data);
-        setFoods(data);
-      })
-      .catch(err => {
-        console.error('❌ Fetch error:', err);
-        setError(err.message);
-      });
-  }, []);
-
-  if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
-  if (!foods) return <p>Loading…</p>;
-
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>Direct Fetch Test</h1>
-      <ul>
-        {foods.map(f => (
-          <li key={f._id}>{f.name} — ${f.price}</li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <Menu inverted>
+        <Container>
+          <Menu.Item as={Link} to="/">Menu</Menu.Item>
+          <Menu.Item as={Link} to="/cart">Cart</Menu.Item>
+        </Container>
+      </Menu>
+      <Container style={{ marginTop: '2rem' }}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Header as="h1" textAlign="center">Our Menu</Header>
+                <FoodList />
+              </>
+            }
+          />
+          <Route path="/cart" element={<CartPage />} />
+        </Routes>
+      </Container>
+    </Router>
   );
 }
 

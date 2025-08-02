@@ -3,6 +3,7 @@ const express  = require('express');
 const cors     = require('cors');
 const mongoose = require('mongoose');
 const Food     = require('./models/Food');
+const Order    = require('./models/Order')
 
 const app = express();
 app.use(cors());
@@ -37,3 +38,15 @@ mongoose
     console.error('❌ DB connection error:', err.message);
     process.exit(1);
   });
+
+  // POST /api/orders
+ app.post('/api/orders', async (req, res) => {
+   try {
+     const { items, total } = req.body;
+     const order = await Order.create({ items, total });
+     res.status(201).json(order);
+   } catch (err) {
+     console.error(err);
+     res.status(500).json({ message: 'Could not place order' });
+   }
+ });
