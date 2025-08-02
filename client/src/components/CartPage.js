@@ -1,10 +1,8 @@
 // src/components/CartPage.js
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, Header, List, Button, Divider } from 'semantic-ui-react';
-import { removeFromCart, clearCart } from '../redux/cart/actions';
 import { addToCart, removeFromCart, clearCart } from '../redux/cart/actions';
-
+import { Container, Header, List, Button, Divider } from 'semantic-ui-react';
 import axios from 'axios';
 
 export default function CartPage() {

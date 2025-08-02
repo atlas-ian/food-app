@@ -2,9 +2,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFoods } from '../redux/foods/actions';
-import { Card, Image, Loader, Message } from 'semantic-ui-react';
-import { Button } from 'semantic-ui-react';
-import { useDispatch } from 'react-redux';
+import { Card, Image, Loader, Message, Button } from 'semantic-ui-react';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/cart/actions';
 
 export default function FoodList() {
