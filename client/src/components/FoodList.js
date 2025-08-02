@@ -9,9 +9,13 @@ export default function FoodList() {
   const { loading, items, error } = useSelector(state => state.foods);
 
   useEffect(() => {
+    console.log('📡 Dispatching fetchFoods()');
     dispatch(fetchFoods());
   }, [dispatch]);
 
+  console.log('🗂 Redux foods state:', { loading, items, error });
+
+  
   if (loading) return <Loader active inline="centered" />;
   if (error)   return <Message error header="Error" content={error} />;
 

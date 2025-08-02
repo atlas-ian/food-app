@@ -10,7 +10,7 @@ const api = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 export const fetchFoods = () => async dispatch => {
   dispatch({ type: FETCH_FOODS_REQUEST });
   try {
-    const { data } = await axios.get(`${api}/api/foods`);
+    const { data } = await axios.get(`/api/foods`);
     dispatch({ type: FETCH_FOODS_SUCCESS, payload: data });
   } catch (err) {
     dispatch({ type: FETCH_FOODS_FAILURE, payload: err.message });
