@@ -1,9 +1,9 @@
 // client/src/components/FoodList.js
+
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchFoods } from '../redux/foods/actions';
 import { Card, Image, Loader, Message, Button } from 'semantic-ui-react';
-import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../redux/cart/actions';
 
 export default function FoodList() {
@@ -11,12 +11,8 @@ export default function FoodList() {
   const { loading, items, error } = useSelector(state => state.foods);
 
   useEffect(() => {
-    console.log('📡 Dispatching fetchFoods()');
     dispatch(fetchFoods());
   }, [dispatch]);
-
-  console.log('🗂 Redux foods state:', { loading, items, error });
-
 
   if (loading) return <Loader active inline="centered" />;
   if (error)   return <Message error header="Error" content={error} />;
@@ -29,7 +25,7 @@ export default function FoodList() {
           <Card.Content>
             <Card.Header>{food.name}</Card.Header>
             <Card.Meta>${food.price.toFixed(2)}</Card.Meta>
-            </Card.Content>
+          </Card.Content>
           <Card.Content extra>
             <Button
               fluid
