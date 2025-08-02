@@ -83,13 +83,3 @@ export function FoodListSkeleton() {
     </div>
   );
 }
-              onClick={() => dispatch(addToCart(food))}
-            >
-              Add to Cart
-            </Button>
-          </Card.Content>
-        </Card>
-      ))}
-    </Card.Group>
-  );
-}
