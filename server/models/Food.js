@@ -1,7 +1,10 @@
+// server/models/Food.js
 const mongoose = require('mongoose');
+
 const FoodSchema = new mongoose.Schema({
-  name: String,
-  price: Number,
-  imageUrl: String,
-});
+  name:      { type: String, required: true },
+  price:     { type: Number, required: true },
+  imageUrl:  { type: String, required: true },
+}, { timestamps: true });
+
 module.exports = mongoose.model('Food', FoodSchema);

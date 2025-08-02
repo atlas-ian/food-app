@@ -1,8 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+// client/src/App.js
+import React from 'react';
+import { Container, Header } from 'semantic-ui-react';
+import FoodList from './components/FoodList';
 
 function App() {
-  return <h1>Food Order App</h1>;
+  return (
+    <Container style={{ marginTop: '2rem' }}>
+      <Header as="h1" textAlign="center">Our Menu</Header>
+      <FoodList />
+    </Container>
+  );
 }
 
 export default App;
