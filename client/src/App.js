@@ -1,31 +1,31 @@
-import { Container, Header, Menu } from 'semantic-ui-react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Header from './components/ui/Header';
 import FoodList from './components/FoodList';
 import CartPage from './components/CartPage';
+import './styles/design-system.css';
+import './App.css';
 
 function App() {
   return (
     <Router>
-      <Menu inverted>
-        <Container>
-          <Menu.Item as={Link} to="/">Menu</Menu.Item>
-          <Menu.Item as={Link} to="/cart">Cart</Menu.Item>
-        </Container>
-      </Menu>
-      <Container style={{ marginTop: '2rem' }}>
+      <Header />
+      <main className="main-content">
         <Routes>
           <Route
             path="/"
             element={
-              <>
-                <Header as="h1" textAlign="center">Our Menu</Header>
+              <div className="container">
+                <div className="page-header">
+                  <h1 className="page-title">Our Menu</h1>
+                  <p className="page-subtitle">Discover our delicious selection of fresh, made-to-order meals</p>
+                </div>
                 <FoodList />
-              </>
+              </div>
             }
           />
           <Route path="/cart" element={<CartPage />} />
         </Routes>
-      </Container>
+      </main>
     </Router>
   );
 }
