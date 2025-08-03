@@ -105,11 +105,3 @@ const CartPage = () => {
 };
 
 export default CartPage;
-
-        </div>
-      ))}
-    </div>
-  );
-};
-
-export default CartPage;
