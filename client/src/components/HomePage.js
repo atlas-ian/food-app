@@ -5,7 +5,7 @@ import FoodList from './FoodList';
 
 const HomePage = () => {
   const dispatch = useDispatch();
-  const { loading, items, error } = useSelector((state) => state.foods);
+  const { items: foods } = useSelector((state) => state.foods);
 
   useEffect(() => {
     dispatch(fetchFoods());

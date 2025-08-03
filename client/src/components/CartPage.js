@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFromCart, clearCart } from '../redux/cart/actions';
-import Card, { CardContent, CardHeader, CardTitle } from './ui/Card';
+import Card, { CardContent } from './ui/Card';
 import Button, { IconButton } from './ui/Button';
 import './CartPage.css';
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import './styles/design-system.css';
 import './App.css';
 
@@ -11,8 +10,6 @@ import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
 
 function App() {
-  const userInfo = useSelector((state) => state.user.userInfo);
-
   return (
     <Router>
       <Header />

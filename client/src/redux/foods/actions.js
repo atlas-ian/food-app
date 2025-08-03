@@ -5,8 +5,6 @@ export const FETCH_FOODS_REQUEST = 'FETCH_FOODS_REQUEST';
 export const FETCH_FOODS_SUCCESS = 'FETCH_FOODS_SUCCESS';
 export const FETCH_FOODS_FAILURE = 'FETCH_FOODS_FAILURE';
 
-const api = process.env.REACT_APP_API_URL || 'http://localhost:4000';
-
 export const fetchFoods = () => async dispatch => {
   dispatch({ type: FETCH_FOODS_REQUEST });
   try {
