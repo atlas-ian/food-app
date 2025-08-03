@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const Food     = require('./models/Food');
 const Order    = require('./models/Order')
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const { protect, admin } = require('./middleware/authMiddleware');
 
 const app = express();
 app.use(cors());
@@ -27,12 +28,12 @@ app.get('/api/foods', async (_req, res) => {
 });
 
 
-// Admin check
-const admin = async (req, res, next) => {
-  const user = await User.findById(req.user.id);
-  if (user && user.isAdmin) return next();
-  res.status(403).json({ message: 'Not authorized as admin' });
-};
+// // Admin check
+// const admin = async (req, res, next) => {
+//   const user = await User.findById(req.user.id);
+//   if (user && user.isAdmin) return next();
+//   res.status(403).json({ message: 'Not authorized as admin' });
+// };
 
 // GET /api/admin/orders → all orders
 app.get('/api/admin/orders', protect, admin, async (_req, res) => {
