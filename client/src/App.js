@@ -11,6 +11,7 @@ import RegisterPage from './components/RegisterPage';
 
 function App() {
   return (
+    <Router>
       <Header />
       <main className="main-content">
         <div className="container">
