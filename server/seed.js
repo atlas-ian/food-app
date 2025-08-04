@@ -7,35 +7,35 @@ const Food     = require('./models/Food');
 const sampleFoods = [
   {
     name:     'Margherita Pizza',
-    price:     8.99,
+    price:     3.99,
     imageUrl:  process.env.NODE_ENV === 'production'
       ? `${process.env.CLIENT_URL}/images/pizza.jpg`
       : 'http://localhost:3000/images/pizza.jpg'
   },
   {
     name:     'Veggie Burger',
-    price:     6.49,
+    price:     2.99,
     imageUrl:  process.env.NODE_ENV === 'production'
       ? `${process.env.CLIENT_URL}/images/burger.jpg`
       : 'http://localhost:3000/images/burger.jpg'
   },
   {
     name:     'Caesar Salad',
-    price:     5.99,
+    price:     1.99,
     imageUrl:  process.env.NODE_ENV === 'production'
       ? `${process.env.CLIENT_URL}/images/salad.jpg`
       : 'http://localhost:3000/images/salad.jpg'
   },
   {
     name:     'Spicy Chicken Wings',
-    price:     7.99,
+    price:     4.49,
     imageUrl:  process.env.NODE_ENV === 'production'
       ? `${process.env.CLIENT_URL}/images/wings.jpg`
       : 'http://localhost:3000/images/wings.jpg'
   },
   {
     name:     'Chocolate Brownie',
-    price:     4.50,
+    price:     2.49,
     imageUrl:  process.env.NODE_ENV === 'production'
       ? `${process.env.CLIENT_URL}/images/choclate.jpg`
       : 'http://localhost:3000/images/choclate.jpg'
@@ -43,21 +43,21 @@ const sampleFoods = [
 
   {
     name:     'coke',
-    price:     2.50,
+    price:     1.49,
     imageUrl:  process.env.NODE_ENV === 'production'
       ? `${process.env.CLIENT_URL}/images/coke.jpg`
       : 'http://localhost:3000/images/coke.jpg'
   },
   {
     name:     'Pancakes',
-    price:     9.50,
+    price:     3.49,
     imageUrl:  process.env.NODE_ENV === 'production'
       ? `${process.env.CLIENT_URL}/images/Pancakes.jpg`
       : 'http://localhost:3000/images/Pancakes.jpg'
   },
   {
     name:     'Bread',
-    price:     5.00,
+    price:     1.99,
     imageUrl:  process.env.NODE_ENV === 'production'
       ? `${process.env.CLIENT_URL}/images/Bread.jpg`
       : 'http://localhost:3000/images/Bread.jpg'

@@ -189,7 +189,7 @@ app.post('/api/create-checkout-session', protect, async (req, res) => {
 
     const lineItems = items.map(i => ({
       price_data: {
-        currency: 'usd',
+        currency: 'inr',
         product_data: {
           name: i.name,
           images: i.imageUrl ? [i.imageUrl] : [],

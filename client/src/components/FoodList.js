@@ -47,7 +47,7 @@ export default function FoodList() {
           />
           <CardContent>
             <CardTitle>{food.name}</CardTitle>
-            <CardMeta>${food.price.toFixed(2)}</CardMeta>
+            <CardMeta>₹{food.price.toFixed(2)}</CardMeta>
             <CardActions>
               <Button
                 variant="primary"

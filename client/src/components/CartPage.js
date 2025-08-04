@@ -5,6 +5,9 @@ import { removeFromCart, clearCart, addToCart } from '../redux/cart/actions';
 import Card, { CardContent } from './ui/Card';
 import Button, { IconButton } from './ui/Button';
 import './CartPage.css';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_51Rnti1COxAmCIkLff0rZtLzQKEqQEKlvnkw6hWUFmqvFK85XTaluPghrauCTAIA7SS44Bb4QNnkHrooUHRfGZfVd00b9xiueYA'); // TODO: Replace with your Stripe public key
 
 const CartPage = () => {
   const dispatch = useDispatch();
@@ -24,6 +27,24 @@ const CartPage = () => {
 
   const handleClearCart = () => {
     dispatch(clearCart());
+  };
+
+  const handleStripeCheckout = async () => {
+    const stripe = await stripePromise;
+    const response = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+      body: JSON.stringify({ items: cartItems }),
+    });
+    const data = await response.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      alert('Failed to initiate payment.');
+    }
   };
 
   if (cartItems.length === 0) {
@@ -61,7 +82,7 @@ const CartPage = () => {
             </div>
             <div className="cart-item__details">
               <h3 className="cart-item__name">{item.name}</h3>
-              <p className="cart-item__price">${item.price.toFixed(2)} each</p>
+              <p className="cart-item__price">₹{item.price.toFixed(2)} each</p>
             </div>
             <div className="cart-item__quantity">
               <IconButton
@@ -83,7 +104,7 @@ const CartPage = () => {
               </IconButton>
             </div>
             <div className="cart-item__total">
-              ${(item.price * item.quantity).toFixed(2)}
+              ₹{(item.price * item.quantity).toFixed(2)}
             </div>
           </div>
         ))}
@@ -93,15 +114,15 @@ const CartPage = () => {
         <CardContent>
           <div className="cart-summary__row">
             <span>Subtotal ({itemCount} items)</span>
-            <span>${total.toFixed(2)}</span>
+            <span>₹{total.toFixed(2)}</span>
           </div>
           <div className="cart-summary__row">
             <span>Delivery Fee</span>
-            <span>$2.99</span>
+            <span>₹2.99</span>
           </div>
           <div className="cart-summary__row cart-summary__row--total">
             <span>Total</span>
-            <span>${(total + 2.99).toFixed(2)}</span>
+            <span>₹{(total + 2.99).toFixed(2)}</span>
           </div>
         </CardContent>
       </Card>
@@ -114,9 +135,11 @@ const CartPage = () => {
           Clear Cart
         </Button>
         {userInfo ? (
-          <Button variant="primary">
-            Proceed to Checkout
-          </Button>
+          <>
+            <Button variant="primary" onClick={handleStripeCheckout} disabled={cartItems.length === 0}>
+              Pay with Card (Stripe)
+            </Button>
+          </>
         ) : (
           <Link to="/login">
             <Button variant="primary">
