@@ -32,23 +32,21 @@ function App() {
         onLogout={handleLogout} 
       />
 
-      <>
-        <main className="main-content">
-          <div className="container">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/product/:id" element={<ProductPage />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/success" element={<SuccessPage />} />
-              {userInfo?.isAdmin && (
-                <Route path="/admin/orders" element={<AdminOrdersPage />} />
-              )}
-            </Routes>
-          </div>
-        </main>
-      </>
+      <main className="main-content">
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/product/:id" element={<ProductPage />} />
+            <Route path="/cart" element={<CartPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/success" element={<SuccessPage />} />
+            {userInfo?.isAdmin && (
+              <Route path="/admin/orders" element={<AdminOrdersPage />} />
+            )}
+          </Routes>
+        </div>
+      </main>
     </Router>
   );
 }

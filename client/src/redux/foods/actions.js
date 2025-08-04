@@ -8,8 +8,12 @@ export const FETCH_FOODS_FAILURE = 'FETCH_FOODS_FAILURE';
 export const fetchFoods = () => async dispatch => {
   dispatch({ type: FETCH_FOODS_REQUEST });
   try {
-    const { data } = await axios.get(`/api/foods`);
+    const { data } = await axios.get('/api/foods');
+    dispatch({ type: FETCH_FOODS_SUCCESS, payload: data });
   } catch (err) {
-    dispatch({ type: FETCH_FOODS_FAILURE, payload: err.message });
+    dispatch({ 
+      type: FETCH_FOODS_FAILURE, 
+      payload: err.response?.data?.message || err.message 
+    });
   }
 };

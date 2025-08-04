@@ -1,15 +1,7 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchFoods } from '../redux/foods/actions';
+import React from 'react';
 import FoodList from './FoodList';
 
 const HomePage = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchFoods());
-  }, [dispatch]);
-
   return (
     <>
       <div className="page-header">

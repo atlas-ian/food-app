@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart, clearCart } from '../redux/cart/actions';
+import { Link } from 'react-router-dom';
+import { removeFromCart, clearCart, addToCart } from '../redux/cart/actions';
 import Card, { CardContent } from './ui/Card';
 import Button, { IconButton } from './ui/Button';
 import './CartPage.css';
@@ -8,9 +9,22 @@ import './CartPage.css';
 const CartPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
+  const { userInfo } = useSelector((state) => state.user);
   
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  const handleIncreaseQuantity = (item) => {
+    dispatch(addToCart(item));
+  };
+
+  const handleDecreaseQuantity = (itemId) => {
+    dispatch(removeFromCart(itemId));
+  };
+
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -20,6 +34,9 @@ const CartPage = () => {
         <p className="cart-empty__description">
           Add some delicious items from our menu to get started!
         </p>
+        <Link to="/">
+          <Button variant="primary">Browse Menu</Button>
+        </Link>
       </div>
     );
   }
@@ -50,7 +67,7 @@ const CartPage = () => {
               <IconButton
                 variant="ghost"
                 size="sm"
-                onClick={() => dispatch(removeFromCart(item._id))}
+                onClick={() => handleDecreaseQuantity(item._id)}
                 aria-label="Decrease quantity"
               >
                 −
@@ -59,7 +76,7 @@ const CartPage = () => {
               <IconButton
                 variant="ghost"
                 size="sm"
-                onClick={() => dispatch({ type: 'ADD_TO_CART', payload: item })}
+                onClick={() => handleIncreaseQuantity(item)}
                 aria-label="Increase quantity"
               >
                 +
@@ -92,13 +109,21 @@ const CartPage = () => {
       <div className="cart-actions">
         <Button 
           variant="secondary" 
-          onClick={() => dispatch(clearCart())}
+          onClick={handleClearCart}
         >
           Clear Cart
         </Button>
-        <Button variant="primary">
-          Proceed to Checkout
-        </Button>
+        {userInfo ? (
+          <Button variant="primary">
+            Proceed to Checkout
+          </Button>
+        ) : (
+          <Link to="/login">
+            <Button variant="primary">
+              Login to Checkout
+            </Button>
+          </Link>
+        )}
       </div>
     </div>
   );
