@@ -1,23 +1,15 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { logoutUser } from '../../redux/user/actions';
+import { useSelector } from 'react-redux';
 import './Header.css';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const dispatch = useDispatch();
   const cartItems = useSelector(state => state.cart.items);
-  const { userInfo } = useSelector(state => state.user);
   const cartItemCount = cartItems.reduce((total, item) => total + item.quantity, 0);
 
   const isActive = (path) => location.pathname === path;
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-    setIsMenuOpen(false);
-  };
 
   return (
     <header className="header">
@@ -46,29 +38,6 @@ export default function Header() {
                 <span className="header__cart-badge">{cartItemCount}</span>
               )}
             </Link>
-            {userInfo ? (
-              <div className="header__user-menu">
-                <span className="header__user-name">Hi, {userInfo.name}</span>
-                <button onClick={handleLogout} className="header__logout-btn">
-                  Logout
-                </button>
-              </div>
-            ) : (
-              <div className="header__auth-links">
-                <Link 
-                  to="/login" 
-                  className={`header__nav-link ${isActive('/login') ? 'header__nav-link--active' : ''}`}
-                >
-                  Login
-                </Link>
-                <Link 
-                  to="/register" 
-                  className={`header__nav-link ${isActive('/register') ? 'header__nav-link--active' : ''}`}
-                >
-                  Register
-                </Link>
-              </div>
-            )}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -105,31 +74,6 @@ export default function Header() {
               <span className="header__cart-badge">{cartItemCount}</span>
             )}
           </Link>
-          {userInfo ? (
-            <>
-              <span className="header__user-name">Hi, {userInfo.name}</span>
-              <button onClick={handleLogout} className="header__logout-btn">
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link 
-                to="/login" 
-                className={`header__nav-link ${isActive('/login') ? 'header__nav-link--active' : ''}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Login
-              </Link>
-              <Link 
-                to="/register" 
-                className={`header__nav-link ${isActive('/register') ? 'header__nav-link--active' : ''}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Register
-              </Link>
-            </>
-          )}
         </nav>
       </div>
     </header>

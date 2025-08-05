@@ -11,7 +11,20 @@
     "install": "cd server && npm install && cd ../client && npm install",
     "seed": "cd server && npm run seed"
   },
-  "keywords": ["food", "ordering", "react", "node"],
+  "keywords": [
+    "food",
+    "ordering",
+    "react",
+    "node"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atlas-ian/food-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/atlas-ian/food-app/issues"
+  },
+  "homepage": "https://github.com/atlas-ian/food-app#readme"
 }

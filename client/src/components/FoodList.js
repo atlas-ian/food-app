@@ -13,7 +13,10 @@ export default function FoodList() {
   const dispatch = useDispatch();
   const { loading, items, error } = useSelector(state => state.foods);
 
+  console.log('FoodList render:', { loading, items: items.length, error });
+
   useEffect(() => {
+    console.log('Dispatching fetchFoods');
     dispatch(fetchFoods());
   }, [dispatch]);
 

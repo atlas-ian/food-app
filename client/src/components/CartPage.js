@@ -12,7 +12,6 @@ const stripePromise = loadStripe('pk_test_51Rnti1COxAmCIkLff0rZtLzQKEqQEKlvnkw6h
 const CartPage = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
-  const { userInfo } = useSelector((state) => state.user);
   
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const itemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -35,7 +34,6 @@ const CartPage = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
       },
       body: JSON.stringify({ items: cartItems }),
     });
@@ -134,19 +132,9 @@ const CartPage = () => {
         >
           Clear Cart
         </Button>
-        {userInfo ? (
-          <>
-            <Button variant="primary" onClick={handleStripeCheckout} disabled={cartItems.length === 0}>
-              Pay with Card (Stripe)
-            </Button>
-          </>
-        ) : (
-          <Link to="/login">
-            <Button variant="primary">
-              Login to Checkout
-            </Button>
-          </Link>
-        )}
+        <Button variant="primary" onClick={handleStripeCheckout} disabled={cartItems.length === 0}>
+          Pay with Card (Stripe)
+        </Button>
       </div>
     </div>
   );

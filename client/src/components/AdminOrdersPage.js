@@ -5,7 +5,6 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 export default function AdminOrdersPage() {
-  const { userInfo } = useSelector(s => s.user);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError]     = useState(null);
@@ -14,8 +13,7 @@ export default function AdminOrdersPage() {
     const fetchOrders = async () => {
       try {
         const { data } = await axios.get(
-          `${process.env.REACT_APP_API_URL}/api/admin/orders`,
-          { headers: { Authorization: `Bearer ${userInfo.token}` } }
+          `${process.env.REACT_APP_API_URL}/api/admin/orders`
         );
         setOrders(data);
       } catch (err) {
@@ -25,7 +23,7 @@ export default function AdminOrdersPage() {
       }
     };
     fetchOrders();
-  }, [userInfo]);
+  }, []);
 
   if (loading) return <Loader active inline="centered" />;
   if (error)   return <Message error header="Error" content={error} />;

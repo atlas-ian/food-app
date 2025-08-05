@@ -10,26 +10,21 @@ import Header from './components/ui/Header';
 import HomePage from './components/HomePage';
 import ProductPage from './components/ProductPage';
 import CartPage from './components/CartPage';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
 import SuccessPage from './components/SuccessPage';
 import AdminOrdersPage from './components/AdminOrdersPage';
 
-import { logoutUser } from './redux/user/actions';
 
 function App() {
   const dispatch = useDispatch();
-  const userInfo = useSelector(state => state.user.userInfo);
-
-  const handleLogout = () => {
-    dispatch(logoutUser());
-  };
+  // Remove all userInfo, logoutUser, and authentication logic
+  // Remove useSelector/useDispatch for user
+  // Remove admin-only routes if not needed
 
   return (
     <Router>
       <Header 
-        userInfo={userInfo} 
-        onLogout={handleLogout} 
+        // userInfo={userInfo} 
+        // onLogout={handleLogout} 
       />
 
       <main className="main-content">
@@ -38,12 +33,10 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
             <Route path="/success" element={<SuccessPage />} />
-            {userInfo?.isAdmin && (
+            {/* {userInfo?.isAdmin && (
               <Route path="/admin/orders" element={<AdminOrdersPage />} />
-            )}
+            )} */}
           </Routes>
         </div>
       </main>
